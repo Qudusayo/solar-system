@@ -20,6 +20,13 @@ const Ul = styled.ul`
   align-items: center;
   list-style-type: none;
   gap: 2em;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2em;
+  }
 `;
 
 const Li = styled.li`

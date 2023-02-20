@@ -26,6 +26,10 @@ body {
   margin-bottom: 3em;
   width: 100%;
   max-width: 100vw;
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
 }
 
 /* width */
@@ -86,5 +90,5 @@ a {
   display: block;
   width: 15em;
   height: 15em;
-  object-fit: cover;
+  object-fit: contain;
 }

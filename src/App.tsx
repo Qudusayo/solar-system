@@ -3,7 +3,6 @@ import Card from "./components/Card/Card";
 import Navbar from "./components/Navbar/Navbar";
 import PlanetData from "./assets/planetsdata.json";
 
-import Mercury from "./assets/mercury.svg";
 import Selector from "./components/Selector/Selector";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -31,12 +30,24 @@ const Grid = styled.div<{ grid?: string }>`
     props.grid ? props.grid : "repeat(4, 1fr)"};
   width: 100%;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Info = styled.div`
   line-height: 1.5em;
   font-weight: 300;
   margin: 1.5em 0;
+`;
+
+const SelectorDiv = styled.div`
+  margin-top: 2em;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 function App() {
@@ -55,6 +66,10 @@ function App() {
     }
   }, [hash]);
 
+  useEffect(() => {
+    console.log(displayPlanet);
+  }, [displayPlanet]);
+
   return (
     <div className="App">
       <Navbar />
@@ -62,20 +77,29 @@ function App() {
         <Grid grid="2fr 1fr" style={{ minHeight: "80vh" }}>
           <Swiper slidesPerView={1} ref={swiperRef} className="mySwiper">
             <SwiperSlide>
-              <img src={Mercury} alt="Mercury" />
+              <img
+                src={`/planets/${displayPlanet?.name.toLowerCase()}.svg`}
+                alt={`${displayPlanet?.name}`}
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={Mercury} alt="Mercury" />
+              <img
+                src={`/planets/${displayPlanet?.name.toLowerCase()}-core.svg`}
+                alt={`${displayPlanet?.name}-core`}
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={Mercury} alt="Mercury" />
+              <img
+                src={`/planets/${displayPlanet?.name.toLowerCase()}-inner.svg`}
+                alt={`${displayPlanet?.name}-inner`}
+              />
             </SwiperSlide>
           </Swiper>
           <div>
             <h1 style={{ fontSize: "4em" }}>{displayPlanet?.name}</h1>
             <Info>{displayPlanet?.Content}</Info>
             <span>Source : Wikipedia</span>
-            <div style={{ marginTop: "2em" }}>
+            <SelectorDiv>
               <Selector
                 clickHandler={() => swiperRef.current?.swiper.slideTo(0)}
                 id="01"
@@ -94,7 +118,7 @@ function App() {
                 label="Surface Geology"
                 active={swiperRef.current?.swiper.activeIndex === 2}
               />
-            </div>
+            </SelectorDiv>
           </div>
         </Grid>
         <Grid>

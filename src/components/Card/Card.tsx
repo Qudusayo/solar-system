@@ -3,6 +3,13 @@ import styled from "styled-components";
 const Div = styled.div`
   padding: 1.25em;
   border: 1px solid #1e2d3d;
+
+  @media (max-width: 768px) {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 const Span = styled.span`
@@ -13,6 +20,7 @@ const Span = styled.span`
 
   @media (max-width: 768px) {
     font-size: 0.85em;
+    margin-bottom: 0;
   }
 `;
 
